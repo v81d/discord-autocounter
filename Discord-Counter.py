@@ -12,34 +12,29 @@ import keyboard
 
 # Base variables
 num = int(input('Enter the first number: '))
-main = 'INSERT_TOKEN_HERE'
-alt = 'INSERT_TOKEN_HERE'
+main = 'INPUT_MAIN_TOKEN'
+alt = 'INPUT_ALT_TOKEN'
 
 # This sends a message to the counting channel
 # Requires a token and message
-def send_msg(token, msg, channel = INSERT_CHANNEL_ID_HERE):
+def send(token, message, channel = INPUT_CHANNEL_ID):
     # Create POST request headers
     url = f'https://discord.com/api/v9/channels/{channel}/messages'
     data = {
-        'content': msg
+        'content': message
     }
     headers = {
         'Authorization': token
     }
 
-    try:
-        # Send the POST request
-        response = requests.post(url, json = data, headers = headers)
-    
-        # If the code reaches here, the request has finished
-        print('Request finished.')
-        
-    except requests.exceptions.RequestException as e:
-        # This will catch any request-related errors, indicating the request was not able to finish
-        print(f'An error occurred: {e}')
-        print('Exiting the program: Stopped at ' + str(num - 1))
-        print('Stopped to avoid any errors.')
-        exit(0)
+    # Send the POST request
+    response = requests.post(url, json = data, headers = headers)
+
+    # If the code reaches here, the request has finished
+    # However, we must check for specific errors (e.g., 429 - Too Many Requests)
+    if response.status_code == 429:
+        # Wait 10 seconds before continuing
+        time.sleep(10)
 
 # Main loop
 # Sends a message with a random delay to avoid script detection
@@ -50,11 +45,11 @@ while True:
         exit(0)
     
     # Count on the main account
-    send_msg(main, str(num))
+    send(main, str(num))
     time.sleep(random.uniform(0.5, 0.8))
     num += 1
 
     # Count on the alt account
-    send_msg(alt, str(num))
+    send(alt, str(num))
     time.sleep(random.uniform(0.5, 0.8))
     num += 1
