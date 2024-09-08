@@ -8,6 +8,7 @@ PLEASE RUN THIS CODE AT YOUR OWN RISK.
 import requests
 import time
 import random
+import keyboard
 
 # Base variables
 num = int(input('Enter the first number: '))
@@ -29,12 +30,14 @@ def send_msg(token, msg, channel = 1220081614277574728):
     # Post the API request
     response = requests.post(url, headers = headers, json = data)
 
-    # Print the status code to the console (for debugging)
-    print(response.status_code)
-
 # Main loop
 # Sends a message with a random delay to avoid script detection
 while True:
+    # Break out of the program when ESC is pressed
+    while keyboard.is_pressed('esc'):
+        print('Exiting the program:\nStopped at ' + num)
+        exit(0)
+    
     # Count on the main account
     send_msg(main, str(num))
     time.sleep(random.uniform(0.3, 0.5))
