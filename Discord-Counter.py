@@ -32,18 +32,21 @@ def send_msg(token, msg, channel = 1220081614277574728):
         response = requests.post(url, json = data, headers = headers)
     
         # If the code reaches here, the request has finished
-        print("Request finished.")
+        print('Request finished.')
         
     except requests.exceptions.RequestException as e:
         # This will catch any request-related errors, indicating the request was not able to finish
-        print(f"An error occurred: {e}")
+        print(f'An error occurred: {e}')
+        print('Exiting the program: Stopped at ' + str(num - 1))
+        print('Stopped to avoid any errors.')
+        exit(0)
 
 # Main loop
 # Sends a message with a random delay to avoid script detection
 while True:
     # Break out of the program when ESC is pressed
     while keyboard.is_pressed('esc'):
-        print('Exiting the program:\nStopped at ' + str(num - 1))
+        print('Exiting the program: Stopped at ' + str(num - 1))
         exit(0)
     
     # Count on the main account
