@@ -1,35 +1,47 @@
-import pyautogui
-import keyboard
+'''
+DISCLAIMER:
+EXECUTING SUCH CODE IS AGAINST DISCORD'S TERMS OF SERVICE AND MAY LEAD TO CONSEQUENCES.
+PLEASE RUN THIS CODE AT YOUR OWN RISK.
+'''
+
+# Import the necessary modules
+import requests
 import time
+import random
 
-# Select the points
-main = pyautogui.Point(x=1605, y=1034)
-alt = pyautogui.Point(x=1586, y=494)
-num = int(input('What number do you want to start at? '))
+# Base variables
+num = int(input('Enter the first number: '))
+main = 'INSERT_TOKEN_HERE'
+alt = 'INSERT_TOKEN_HERE'
 
-def count(input):
-    global num
-    # Select the input point
-    pyautogui.click(input)
-    # Enter the number in the input box, then press enter and increase the count
-    keyboard.write(str(num))
-    keyboard.press_and_release('enter')
-    num += 1
+# This sends a message to the counting channel
+# Requires a token and message
+def send_msg(token, msg, channel = 1220081614277574728):
+    # Create POST request headers
+    url = f'https://discord.com/api/v9/channels/{channel}/messages'
+    data = {
+        'content': msg
+    }
+    headers = {
+        'Authorization': token
+    }
 
-time.sleep(3)
+    # Post the API request
+    response = requests.post(url, headers = headers, json = data)
+
+    # Print the status code to the console (for debugging)
+    print(response.status_code)
+
 # Main loop
+# Sends a message with a random delay to avoid script detection
 while True:
-    # Exit script if ESC is pressed
-    while keyboard.is_pressed('esc'):
-        print('Exiting the program:\nStopping at ' + str(num))
-        exit(0)
+    # Count on the main account
+    send_msg(main, str(num))
+    time.sleep(random.uniform(0.3, 0.5))
 
-    # Execute function on the main point
-    count(main)
-    # Wait 1.5s
-    time.sleep(2)
+    # Count on the alt account
+    send_msg(alt, str(num + 1))
+    time.sleep(random.uniform(0.3, 0.5))
 
-    # Execute function on the other point
-    count(alt)
-    # Wait 1.5s
-    time.sleep(2)
+    # Increase the count by 2
+    num += 2
