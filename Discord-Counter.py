@@ -27,8 +27,16 @@ def send_msg(token, msg, channel = 1220081614277574728):
         'Authorization': token
     }
 
-    # Post the API request
-    response = requests.post(url, headers = headers, json = data)
+    try:
+        # Send the POST request
+        response = requests.post(url, json = data, headers = headers)
+    
+        # If the code reaches here, the request has finished
+        print("Request finished.")
+        
+    except requests.exceptions.RequestException as e:
+        # This will catch any request-related errors, indicating the request was not able to finish
+        print(f"An error occurred: {e}")
 
 # Main loop
 # Sends a message with a random delay to avoid script detection
@@ -40,11 +48,10 @@ while True:
     
     # Count on the main account
     send_msg(main, str(num))
-    time.sleep(random.uniform(0.3, 0.5))
+    time.sleep(random.uniform(0.5, 0.8))
+    num += 1
 
     # Count on the alt account
-    send_msg(alt, str(num + 1))
-    time.sleep(random.uniform(0.3, 0.5))
-
-    # Increase the count by 2
-    num += 2
+    send_msg(alt, str(num))
+    time.sleep(random.uniform(0.5, 0.8))
+    num += 1
