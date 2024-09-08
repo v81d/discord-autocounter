@@ -17,7 +17,7 @@ alt = 'INSERT_TOKEN_HERE'
 
 # This sends a message to the counting channel
 # Requires a token and message
-def send_msg(token, msg, channel = 1220081614277574728):
+def send_msg(token, msg, channel = INSERT_CHANNEL_ID_HERE):
     # Create POST request headers
     url = f'https://discord.com/api/v9/channels/{channel}/messages'
     data = {
