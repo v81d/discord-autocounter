@@ -35,7 +35,7 @@ def send_msg(token, msg, channel = 1220081614277574728):
 while True:
     # Break out of the program when ESC is pressed
     while keyboard.is_pressed('esc'):
-        print('Exiting the program:\nStopped at ' + num)
+        print('Exiting the program:\nStopped at ' + str(num - 1))
         exit(0)
     
     # Count on the main account
