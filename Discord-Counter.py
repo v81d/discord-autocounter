@@ -15,8 +15,6 @@ os.system('cls') # Clears the screen on Windows
 
 # Base variables
 num = int(input('What is the starting number? '))
-min = float(input('What is the minimum delay in seconds? '))
-max = float(input('What is the maximum delay in seconds? '))
 main = 'INPUT_ACCOUNT_TOKEN'
 alt = 'INPUT_ACCOUNT_TOKEN'
 print('The program has started! Hold ESC to exit the program at any time. The count will be logged below.')
@@ -54,11 +52,11 @@ while True:
     # Count on the main account
     send(main, str(num))
     print('[MAIN]', num)
-    time.sleep(random.uniform(min, max))
+    time.sleep(random.uniform(0.9, 1.1))
     num += 1
 
     # Count on the alt account
     send(alt, str(num))
     print('[ALT]', num)
-    time.sleep(random.uniform(min, max))
+    time.sleep(random.uniform(0.9, 1.1))
     num += 1
