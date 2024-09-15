@@ -12,6 +12,7 @@ import keyboard
 import os
 import string
 
+# Comment out the line below if you are using MacOS
 os.system('cls') # Clears the screen on Windows
 
 # Input variables
