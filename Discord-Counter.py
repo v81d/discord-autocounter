@@ -31,7 +31,7 @@ print('The program has started! Hold ESC to exit the program at any time. The co
 
 # This periodically sends random messages in the same channel to check if the rate limit has ended
 def check(token):
-    global num, channel, curr, mode
+    global num, channel, delay, curr, mode
     i = 1 # Set the iteration count to 1
 
     # Run the loop until the rate limit is gone
@@ -53,7 +53,8 @@ def check(token):
             time.sleep(timeout)
             mode = 0
 
-            # Break out of loop
+            # Break out of loop and increase the delay to prevent another rate limit
+            delay *= 1.3765
             break
 
         # Execute if status code is 429 or any other error
