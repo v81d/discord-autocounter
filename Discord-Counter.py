@@ -15,13 +15,14 @@ os.system('cls') # Clears the screen on Windows
 
 # Base variables
 num = int(input('What is the starting number? '))
-main = 'INPUT_ACCOUNT_TOKEN'
-alt = 'INPUT_ACCOUNT_TOKEN'
+main = 'INPUT_ACCOUNT_TOKEN_STRING'
+alt = 'INPUT_ACCOUNT_TOKEN_STRING'
+channel = INPUT_DEFAULT_CHANNEL_ID_INTEGER
 print('The program has started! Hold ESC to exit the program at any time. The count will be logged below.')
 
 # This sends a message to the counting channel
 # Requires a token and message
-def send(token, message, channel = INPUT_CHANNEL_ID):
+def send(token, message, channel):
     # Create POST request headers
     url = f'https://discord.com/api/v9/channels/{channel}/messages'
     data = {
@@ -40,6 +41,10 @@ def send(token, message, channel = INPUT_CHANNEL_ID):
         print('Exiting the program: Stopped at ' + str(num - 1))
         print('You have been rate limited by Discord!')
         exit(0)
+    elif response.status_code not in (429, 200):
+        print('Exiting the program: Stopped at ' + str(num - 1))
+        print(f'A fatal error occurred (STATUS: {response.status_code}). The program has stopped to avoid any issues!')
+        exit(0)
 
 # Main loop
 # Sends a message with a random delay to avoid script detection
@@ -50,13 +55,13 @@ while True:
         exit(0)
     
     # Count on the main account
-    send(main, str(num))
+    send(main, str(num), channel)
     print('[MAIN]', num)
-    time.sleep(random.uniform(0.9, 1.1))
+    time.sleep(random.uniform(0.7, 0.9))
     num += 1
 
     # Count on the alt account
-    send(alt, str(num))
+    send(alt, str(num), channel)
     print('[ALT]', num)
-    time.sleep(random.uniform(0.9, 1.1))
+    time.sleep(random.uniform(0.7, 0.9))
     num += 1
