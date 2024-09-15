@@ -36,14 +36,10 @@ def send(token, message, channel):
     response = requests.post(url, json = data, headers = headers)
 
     # If the code reaches here, the request has finished
-    # However, we must check for specific errors (e.g., 429 - Too Many Requests)
-    if response.status_code == 429:
+    # However, we must check for errors
+    if response.status_code != 200:
         print('Exiting the program: Stopped at ' + str(num - 1))
-        print('You have been rate limited by Discord!')
-        exit(0)
-    elif response.status_code not in (429, 200):
-        print('Exiting the program: Stopped at ' + str(num - 1))
-        print(f'A fatal error occurred (STATUS: {response.status_code}). The program has stopped to avoid any issues!')
+        print('The request did not return status code 200 (OK). The script has been stopped to avoid breaking the count.')
         exit(0)
 
 # Main loop
