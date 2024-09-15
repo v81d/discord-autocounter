@@ -123,10 +123,10 @@ while True:
         # Count on the main account
         send(main, str(num), channel, mode)
         print('[MAIN]', num)
-        time.sleep(random.uniform(delay * 1.4355, delay * 2.1625))
+        time.sleep(random.uniform(delay * 0.9355, delay * 2.1625))
 
     if mode == 0 and curr == alt:
         # Count on the alt account
         send(alt, str(num), channel, mode)
         print('[ALT]', num)
-        time.sleep(random.uniform(delay * 1.4355, delay * 2.1625))
+        time.sleep(random.uniform(delay * 0.9355, delay * 2.1625))
