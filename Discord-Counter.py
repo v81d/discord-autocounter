@@ -37,7 +37,7 @@ def send(token, message, channel):
 
     # If the code reaches here, the request has finished
     # However, we must check for errors
-    if response.status_code != 200:
+    if not response.ok:
         print('Exiting the program: Stopped at ' + str(num - 1))
         print('The request did not return status code 200 (OK). The script has been stopped to avoid breaking the count.')
         exit(0)
