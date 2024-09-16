@@ -102,11 +102,14 @@ def send(token, message, channel, md):
                 print('The request did not return status code 200 (OK). The script has been stopped to avoid breaking the count.')
                 exit(0)
         else:
-            num += 1
             if curr == main:
+                print('[MAIN]', num)
                 curr = alt
             else:
+                print('[ALT]', num)
                 curr = main
+
+            num += 1
     else:
         # The mode is 1, meaning we are currently in the rate limit check loop
         return response.status_code
@@ -122,11 +125,9 @@ while True:
     if mode == 0 and curr == main:
         # Count on the main account
         send(main, str(num), channel, mode)
-        print('[MAIN]', num)
         time.sleep(random.uniform(delay * 0.9355, delay * 2.1625))
 
     if mode == 0 and curr == alt:
         # Count on the alt account
         send(alt, str(num), channel, mode)
-        print('[ALT]', num)
         time.sleep(random.uniform(delay * 0.9355, delay * 2.1625))
