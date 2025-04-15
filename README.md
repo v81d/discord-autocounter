@@ -1,0 +1,1 @@
+### User bots are against Discord's TOS (Terms of Service). I do not claim responsibility for any consequences taken as a result of this program. This script should only be used for educational purposes; do not abuse it or send unauthorized API requests to Discord.
